@@ -1,0 +1,58 @@
+<head>
+  <meta charset="utf-8">
+  <title>Capstone</title>
+  <link rel="alternate" type="application/rss+xml" title="My Portfolio" href="/rss/posts">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<template name="navbar">
+  <nav class="navbar navbar-default" role="navigation">
+      <!-- container-fluid not used so navigation text aligns with body text -->
+      <div class="container-fluid">
+        <!--start collapsed navbar-->
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#main_navbar"
+            aria-expanded="false">
+            <!--screen reader only text-->
+            <span class="sr-only">Open Navigation</span>
+            <!-- conventional icon bars rather than text -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div> <!--/ collapsed navbar-->
+          <!--start un-collapsed navbar-->
+        <div class="collapse navbar-collapse" id="main_navbar">
+          <ul class="nav navbar-nav navbar-left">
+            <a href="/" class="navbar-brand">Trabajo Ski Club</a>
+            <li><a href="/">Home</a></li>
+            <li><a href="/trabajo_lodge">Trabajo Lodge</a></li>
+            <li><a href="/image_gallery">Image Gallery</a></li>
+            <li><a href="/club_news">Club News</a></li>
+            <li><a href="/chat">Club Chat</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {{> loginButtons}}
+          </ul>
+        </div> <!--/ un-collapsed navbar -->
+      </div> <!--/ container -->
+    </nav>
+</template>
+
+<template name="footer">
+  <div class="container-fluid navbar-body">
+      <a href="/" class="navbar-brand">Trabajo Ski Club</a>
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="/" id="navbar_text">Home</a></li>
+        <li><a href="/trabajo_lodge" id="navbar_text">Trabajo Lodge</a></li>
+        <li><a href="/image_gallery">Image Gallery</a></li>
+        <li><a href="/club_news">Club News</a></li>
+        <li><a href="/chat">Club Chat</a></li>
+      </ul>
+
+  </div>
+</template>

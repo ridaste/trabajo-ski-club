@@ -1,0 +1,62 @@
+<template name="chat">
+  <h3>Club Chat</h3>
+  {{> chat_add_form}}
+  {{> chats}}
+</template>
+
+<template name="chats">
+  {{#if currentUser}}
+  <button class="btn btn-success js-show-chat-form">add chat</button>
+  {{/if}}
+  <br><br>
+  {{#each chats}}
+  <div class="row">
+    <div class="col-md-12">
+      <p><strong>{{chat_topic}}</strong></p>
+    </div> <!-- / col -->
+  </div> <!-- / row -->
+  <div class="row">
+    <div class="col-md-12">
+			<div class="well well-lg">
+  			{{#each messages}}
+  			   {{> chat_message}}
+  			{{/each}}
+  			</div>
+  		</div> <!-- / col -->
+    </div> <!-- / row -->
+  <div class="row">
+    <div class="col-md-12">
+      <form class="js-send-chat">
+        <input class="input" type="text" name="chat" size="50" placeholder="type a message here...">
+        <button class="btn btn-default">send</button>
+      </form>
+    </div><!-- / col -->
+  </div> <!-- / row -->
+  {{/each}}
+</template>
+
+<template name="chat_message">
+  <p>{{user}} wrote: {{text}}</p>
+</template>
+
+<template name="chat_add_form">
+  <div class="modal fade" id="chat_add_form">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+          </div>
+        </div>
+        <div class="modal-body">
+          <form class="js-add-chat">
+            <p>Chat Topic: <input type="text" name="chat_topic" size="68%"/></p>
+            <p><button class="btn btn-success">save</button></p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-warning" data-dismiss="modal">cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
