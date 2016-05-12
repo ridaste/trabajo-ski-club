@@ -1,0 +1,52 @@
+<template name="image_gallery">
+  <h3>Image Galleries</h3>
+  {{> image_add_form}}
+  {{> images}}
+</template>
+
+<template name="images">
+  {{#if currentUser}}
+  <button class="btn btn-success js-show-image-form">add image</button>
+  {{/if}}
+  <br/><br/>
+  <div class="row">
+    {{#each images}}
+    <div class="col-sm-4 col-md-3">
+      <div class="thumbnail">
+          <img src="{{img_src}}" alt="{{img_alt}}"/>
+        <div class="caption">
+          <p>Image: {{img_name}}</p>
+          <p>Added By: {{createdByName}}</p>
+          {{#if currentUser}}
+          <button class="js-del-image btn btn-warning">delete</button>
+          {{/if}}
+        </div>
+      </div>
+    </div> <!-- / col -->
+    {{/each}}
+  </div> <!-- / row -->
+</template>
+
+<template name="image_add_form">
+  <div class="modal fade" id="image_add_form">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+          </div>
+        </div>
+        <div class="modal-body">
+          <form class="js-add-image">
+            <p>Image Name: <input type="text" name="img_name"/></p>
+            <p>Image Source: <input type="text" name="img_src"/></p>
+            <p>Image Description: <input type="text" name="img_alt"/></p>
+            <p><button class="btn btn-success">save</button></p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-warning" data-dismiss="modal">cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
