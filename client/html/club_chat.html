@@ -1,7 +1,9 @@
 <template name="chat">
-  <h3>Club Chat</h3>
-  {{> chat_add_form}}
-  {{> chats}}
+  <div class="container">
+    <div class="page-heading">Club Chat</div><br>
+      {{> chat_add_form}}
+      {{> chats}}
+  </div>
 </template>
 
 <template name="chats">
@@ -12,14 +14,14 @@
   {{#each chats}}
   <div class="row">
     <div class="col-md-12">
-      <p><strong>{{chat_topic}}</strong></p>
+      <hr><p class="post_title">{{chat_topic}}</p>
     </div> <!-- / col -->
   </div> <!-- / row -->
   <div class="row">
     <div class="col-md-12">
 			<div class="well well-lg">
   			{{#each messages}}
-  			   {{> chat_message}}
+  			   <p>{{> chat_message}}</p>
   			{{/each}}
   			</div>
   		</div> <!-- / col -->
@@ -27,7 +29,7 @@
   <div class="row">
     <div class="col-md-12">
       <form class="js-send-chat">
-        <input class="input" type="text" name="chat" size="50" placeholder="type a message here...">
+        <input class="input" type="text" name="chat" size="80" placeholder="type a message here...">
         <button class="btn btn-default">send</button>
       </form>
     </div><!-- / col -->
@@ -36,7 +38,7 @@
 </template>
 
 <template name="chat_message">
-  <p>{{user}} wrote: {{text}}</p>
+  <p><span class="chat_poster">{{user}}:</span><span class="chat-text"> {{text}}</span></p>
 </template>
 
 <template name="chat_add_form">

@@ -30,6 +30,10 @@ Template.chats.helpers({
   chats:Chats.find({}, {sort:{createdOn:-1}})
 });
 
+Template.club_news.helpers({
+  blog_posts:Blog.Post.find({}, {sort:{createdAt:-1}})
+});
+
 //////////
 /// EVENTS
 //////////
@@ -61,7 +65,6 @@ Template.image_add_form.events({
       var userId = Meteor.userId();
       var user = Meteor.users.findOne({_id: userId});
       var name = user.username;
-      console.log(name);
       Images.insert({
         img_name:img_name,
         img_src:img_src,
@@ -70,6 +73,9 @@ Template.image_add_form.events({
         createdByName:name,
         createdOn:new Date()
       });
+      event.target.img_name.value = "";
+      event.target.img_src.value = "";
+      event.target.img_alt.value = "";
       $("#image_add_form").modal('hide');
       return false;
     }

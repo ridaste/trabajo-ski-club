@@ -1,0 +1,23 @@
+<template name="club_news">
+  <div class="container">
+    <div class="page-heading">Club News</div><br>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/club_news">Club News</a></li>
+    </ol>
+    {{#each blog_posts}}
+    <div class="row">
+      <hr>
+      <p class="post_title">{{title}}</p>
+      <div class="col-md-4">
+        <img class="blog_image" src="{{featuredImage}}"/>
+      </div>
+      <div class="col-md-8">
+        <p>{{excerpt}}</p>
+      </div>
+  </div>
+  {{else}}
+    <p>There are no posts in the database</p>
+  {{/each}}
+  </div>
+</template>

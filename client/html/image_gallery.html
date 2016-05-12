@@ -1,7 +1,13 @@
 <template name="image_gallery">
-  <h3>Image Galleries</h3>
-  {{> image_add_form}}
-  {{> images}}
+  <div class="container-fluid">
+    <div class="page-heading">Image Galleries</div><br>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/image_gallery">Image Gallery</a></li>
+    </ol>
+    {{> image_add_form}}
+    {{> images}}
+  </div>
 </template>
 
 <template name="images">
@@ -13,7 +19,7 @@
     {{#each images}}
     <div class="col-sm-4 col-md-3">
       <div class="thumbnail">
-          <img src="{{img_src}}" alt="{{img_alt}}"/>
+          <img class="thumbnail-img" src="{{img_src}}" alt="{{img_alt}}"/>
         <div class="caption">
           <p>Image: {{img_name}}</p>
           <p>Added By: {{createdByName}}</p>
