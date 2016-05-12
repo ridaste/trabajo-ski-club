@@ -8,7 +8,7 @@
 <template name="navbar">
   <nav class="navbar navbar-default" role="navigation">
       <!-- container-fluid not used so navigation text aligns with body text -->
-      <div class="container-fluid">
+      <div class="container">
         <!--start collapsed navbar-->
         <div class="navbar-header">
           <button
@@ -44,7 +44,8 @@
 </template>
 
 <template name="footer">
-  <div class="container-fluid navbar-body">
+  <nav class="navbar navbar-default" role="navigation">
+  <div class="container navbar-body">
       <a href="/" class="navbar-brand">Trabajo Ski Club</a>
       <ul class="nav navbar-nav navbar-left">
         <li><a href="/" id="navbar_text">Home</a></li>
@@ -55,4 +56,5 @@
       </ul>
 
   </div>
+</nav>
 </template>
