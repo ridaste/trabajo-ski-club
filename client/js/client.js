@@ -73,9 +73,7 @@ Template.images.events({
     if (currentUser != image_creator) {
       sAlert.warning("You must have added an image to delete it!");
     } else {
-      $("#"+image_id).hide('slow', function(){
-        Images.remove({"_id":image_id});
-      })
+      Meteor.call('removeImage', image_id);
     }
   }
 });
@@ -113,12 +111,6 @@ Template.chat_add_form.events({
       var user = Meteor.users.findOne({_id: userId});
       var name = user.username;
       Meteor.call('addChat', chat_topic, userId, name);
-      /*Chats.insert({
-        chat_topic:chat_topic,
-        createdBy:userId,
-        createdByName:name,
-        createdOn:new Date()
-      });*/
       $("#chat_add_form").modal('hide');
       return false;
     }
@@ -145,7 +137,6 @@ Template.chat.events({
       chat.messages = msgs;
       chatId = chat._id;
       Meteor.call('sendMessage', chatId, chat);
-      //Chats.update(chat._id, chat);
     }
   }
 });

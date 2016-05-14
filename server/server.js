@@ -49,5 +49,8 @@ Meteor.publish('blogs', function() {
     },
     'sendMessage': function(chatId, data) {
       Chats.update(chatId, data);
+    },
+    'removeImage': function(image_id) {
+      Images.remove({"_id":image_id});
     }
   });
