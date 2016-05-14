@@ -1,3 +1,15 @@
+/////////////////
+/// SUBSCRIPTIONS
+/////////////////
+
+Meteor.subscribe('images');
+Meteor.subscribe('chats');
+Meteor.subscribe('blogs');
+///////////
+/// RENDERS
+///////////
+
+
 Template.body.rendered = function(event) {
     $('body').flowtype({
        minimum   : 500,
@@ -77,14 +89,7 @@ Template.image_add_form.events({
       var userId = Meteor.userId();
       var user = Meteor.users.findOne({_id: userId});
       var name = user.username;
-      Images.insert({
-        img_name:img_name,
-        img_src:img_src,
-        img_alt:img_alt,
-        createdBy:userId,
-        createdByName:name,
-        createdOn:new Date()
-      });
+      Meteor.call('addImage', img_name, img_src, img_alt, userId, name);
       event.target.img_name.value = "";
       event.target.img_src.value = "";
       event.target.img_alt.value = "";
@@ -100,21 +105,20 @@ Template.chats.events({
 });
 
 Template.chat_add_form.events({
-    'click .js-add-chat':function(event){
+    'submit .js-add-chat':function(event){
       event.preventDefault();
-      var chat_topic;
-      chat_topic = event.target.chat_topic.value;
+      var chat_topic = event.target.chat_topic.value;
       event.target.chat_topic.value = "";
       var userId = Meteor.userId();
       var user = Meteor.users.findOne({_id: userId});
       var name = user.username;
-      console.log(name);
-      Chats.insert({
+      Meteor.call('addChat', chat_topic, userId, name);
+      /*Chats.insert({
         chat_topic:chat_topic,
         createdBy:userId,
         createdByName:name,
         createdOn:new Date()
-      });
+      });*/
       $("#chat_add_form").modal('hide');
       return false;
     }
@@ -139,7 +143,9 @@ Template.chat.events({
       }
       msgs.push({user:username, text:message, createdOn:new Date()})
       chat.messages = msgs;
-      Chats.update(chat._id, chat);
+      chatId = chat._id;
+      Meteor.call('sendMessage', chatId, chat);
+      //Chats.update(chat._id, chat);
     }
   }
 });
