@@ -1,6 +1,10 @@
 <template name="chat">
   <div class="container">
     <div class="page-heading">Club Chat</div><br>
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/club_chat">Club Chat</a></li>
+      </ol>
       {{> chat_add_form}}
       {{> chats}}
   </div>
@@ -14,7 +18,7 @@
   {{#each chats}}
   <div class="row">
     <div class="col-md-12">
-      <hr><p class="post_title">{{chat_topic}}</p>
+      <hr><p class="post-title">{{chat_topic}}</p><br>
     </div> <!-- / col -->
   </div> <!-- / row -->
   <div class="row">
@@ -29,8 +33,10 @@
   <div class="row">
     <div class="col-md-12">
       <form class="js-send-chat">
-        <input class="input" type="text" name="chat" size="80" placeholder="type a message here...">
-        <button class="btn btn-default">send</button>
+        <!--<input class="input" type="text" name="chat" size="50" placeholder="type a message here...">
+        <button class="btn btn-warning">send</button>-->
+        <textarea name="chat" cols=50 rows=6 placeholder="type a message here..."></textarea><br><br>
+        <p><button class="btn btn-warning">send</button></p>
       </form>
     </div><!-- / col -->
   </div> <!-- / row -->
@@ -38,7 +44,7 @@
 </template>
 
 <template name="chat_message">
-  <p><span class="chat_poster">{{user}}:</span><span class="chat-text"> {{text}}</span></p>
+  <p><span class="chat-poster">{{user}}:</span><span class="chat-text"> {{text}}</span></p>
 </template>
 
 <template name="chat_add_form">

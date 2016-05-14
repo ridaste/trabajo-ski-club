@@ -1,3 +1,15 @@
+Template.body.rendered = function(event) {
+    $('body').flowtype({
+       minimum   : 500,
+       maximum   : 1200,
+       minFont   : 12,
+       maxFont   : 40,
+       fontRatio : 18,
+       lineRatio : 0.8
+    });
+}
+
+
 ////////////
 /// ACCOUNTS
 ////////////
@@ -81,53 +93,53 @@ Template.image_add_form.events({
     }
   });
 
-  Template.chats.events({
-    'click .js-show-chat-form':function(event) {
-      $("#chat_add_form").modal('show');
+Template.chats.events({
+  'click .js-show-chat-form':function(event) {
+    $("#chat_add_form").modal('show');
+  }
+});
+
+Template.chat_add_form.events({
+    'click .js-add-chat':function(event){
+      event.preventDefault();
+      var chat_topic;
+      chat_topic = event.target.chat_topic.value;
+      event.target.chat_topic.value = "";
+      var userId = Meteor.userId();
+      var user = Meteor.users.findOne({_id: userId});
+      var name = user.username;
+      console.log(name);
+      Chats.insert({
+        chat_topic:chat_topic,
+        createdBy:userId,
+        createdByName:name,
+        createdOn:new Date()
+      });
+      $("#chat_add_form").modal('hide');
+      return false;
     }
   });
 
-  Template.chat_add_form.events({
-      'submit .js-add-chat':function(event){
-        event.preventDefault();
-        var chat_topic;
-        chat_topic = event.target.chat_topic.value;
-        event.target.chat_topic.value = "";
-        var userId = Meteor.userId();
-        var user = Meteor.users.findOne({_id: userId});
-        var name = user.username;
-        console.log(name);
-        Chats.insert({
-          chat_topic:chat_topic,
-          createdBy:userId,
-          createdByName:name,
-          createdOn:new Date()
-        });
-        $("#chat_add_form").modal('hide');
-        return false;
+Template.chat.events({
+  'submit .js-send-chat':function(event){
+    event.preventDefault();
+    var chat = Chats.findOne({_id:this._id});
+    var msgs = chat.messages;
+    var message = event.target.chat.value;
+    event.target.chat.value = "";
+    if (!Meteor.userId()){
+      sAlert.error("You must be logged in to send a message!");
+    } else {
+      var msgs = chat.messages;
+      var userId = Meteor.userId()
+      var user = Meteor.users.findOne({_id: userId});
+      var username = user.username;
+      if (!msgs) {
+        msgs = [];
       }
-    });
-
-    Template.chat.events({
-      'submit .js-send-chat':function(event){
-        event.preventDefault();
-        var chat = Chats.findOne({_id:this._id});
-          var msgs = chat.messages;
-        var message = event.target.chat.value;
-        event.target.chat.value = "";
-        if (!Meteor.userId()){
-          sAlert.error("You must be logged in to send a message!");
-        } else {
-          var msgs = chat.messages;
-          var userId = Meteor.userId()
-          var user = Meteor.users.findOne({_id: userId});
-          var username = user.username;
-          if (!msgs) {
-            msgs = [];
-          }
-          msgs.push({user:username, text:message, createdOn:new Date()})
-          chat.messages = msgs;
-          Chats.update(chat._id, chat);
-        }
-      }
-    });
+      msgs.push({user:username, text:message, createdOn:new Date()})
+      chat.messages = msgs;
+      Chats.update(chat._id, chat);
+    }
+  }
+});

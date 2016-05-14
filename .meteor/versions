@@ -96,6 +96,7 @@ momentjs:moment@2.10.6
 mongo@1.1.7
 mongo-id@1.0.4
 mongo-livedata@1.0.12
+mrt:jq-flowtype@0.0.1
 mrt:underscore-string-latest@2.3.3
 npm-bcrypt@0.8.5
 npm-mongo@1.4.43
