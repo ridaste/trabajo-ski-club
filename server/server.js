@@ -9,6 +9,10 @@ Meteor.startup(function(){
   }
 });
 
+//////////////
+/// PUBLISHING
+//////////////
+
 Meteor.publish('images', function() {
   return Images.find();
 });
@@ -25,32 +29,32 @@ Meteor.publish('blogs', function() {
 /// METHODS
 ///////////
 
-  Meteor.methods({
-    'addChat':function(chat_topic, userId, name){
-      console.log("server");
-      var data = {
-        chat_topic:chat_topic,
-        createdBy:userId,
-        createdByName:name,
-        createdOn:new Date()
-      }
-      Chats.insert(data);
-    },
-    'addImage': function(img_name, img_src, img_alt, userId, name) {
-      var data = {
-        img_name:img_name,
-        img_src:img_src,
-        img_alt:img_alt,
-        createdBy:userId,
-        createdByName:name,
-        createdOn:new Date()
-      }
-      Images.insert(data);
-    },
-    'sendMessage': function(chatId, data) {
-      Chats.update(chatId, data);
-    },
-    'removeImage': function(image_id) {
-      Images.remove({"_id":image_id});
+Meteor.methods({
+  'addChat':function(chat_topic, userId, name){
+    console.log("server");
+    var data = {
+      chat_topic:chat_topic,
+      createdBy:userId,
+      createdByName:name,
+      createdOn:new Date()
     }
-  });
+    Chats.insert(data);
+  },
+  'addImage': function(img_name, img_src, img_alt, userId, name) {
+    var data = {
+      img_name:img_name,
+      img_src:img_src,
+      img_alt:img_alt,
+      createdBy:userId,
+      createdByName:name,
+      createdOn:new Date()
+    }
+    Images.insert(data);
+  },
+  'sendMessage': function(chatId, data) {
+    Chats.update(chatId, data);
+  },
+  'removeImage': function(image_id) {
+    Images.remove({"_id":image_id});
+  }
+});

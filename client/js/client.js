@@ -5,6 +5,7 @@
 Meteor.subscribe('images');
 Meteor.subscribe('chats');
 Meteor.subscribe('blogs');
+
 ///////////
 /// RENDERS
 ///////////
@@ -20,7 +21,6 @@ Template.body.rendered = function(event) {
        lineRatio : 0.8
     });
 }
-
 
 ////////////
 /// ACCOUNTS
@@ -68,12 +68,32 @@ Template.images.events({
   },
   'click .js-del-image':function(event) {
     var image_id = this._id;
+    var image = Images.findOne({_id:image_id});
     var currentUser = Meteor.userId();
     var image_creator = this.createdBy;
     if (currentUser != image_creator) {
       sAlert.warning("You must have added an image to delete it!");
     } else {
-      Meteor.call('removeImage', image_id);
+      if ($("#"+image_id).is(":visible")) {
+        console.log("visible");
+      } else {
+        console.log("invisible");
+      }
+      //$("#"+image_id).hide('slow', function(){
+       Meteor.call('removeImage', image_id);
+      //})
+    }
+  },
+  'click .js-activate-s-image-box': function(event) {
+    var image = Images.findOne({_id:this._id});
+    var full_image_source = image.img_src;
+    var img_path = full_image_source;
+    if (img_path) {
+      sImageBox.open(img_path, {
+        originalHeight: true,
+        originalWidth: true,
+        animation: 'slideInDown'
+      });
     }
   }
 });

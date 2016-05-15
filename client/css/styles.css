@@ -6,6 +6,14 @@ textarea {
   font-size: 0.5em;
 }
 
+.navbar-brand {
+  font-size: 2.0em;
+}
+
+#nav_styling {
+  font-size: 1.4em;
+}
+
 .title-image {
   width: 100%;
   padding: 10px;

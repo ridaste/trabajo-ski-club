@@ -1,6 +1,6 @@
 <template name="image_gallery">
   <div class="container-fluid">
-    <div class="page-heading">Image Galleries</div><br>
+    <div class="page-heading">Image Gallery</div><br>
     <ol class="breadcrumb">
       <li><a href="/">Home</a></li>
       <li><a href="/image_gallery">Image Gallery</a></li>
@@ -19,7 +19,7 @@
     {{#each images}}
     <div class="col-sm-4 col-md-3">
       <div class="thumbnail">
-          <img class="thumbnail-img" src="{{img_src}}" alt="{{img_alt}}"/>
+          <img class="js-activate-s-image-box thumbnail-img" src="{{img_src}}" alt="{{img_alt}}"/>
         <div class="caption">
           <p>Image: {{img_name}}</p>
           <p>Added By: {{createdByName}}</p>
