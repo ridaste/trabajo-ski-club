@@ -14,7 +14,7 @@ Meteor.startup(function(){
 //////////////
 
 Meteor.publish('images', function() {
-  return Images.find();
+  return Images.find({});
 });
 
 Meteor.publish('chats', function() {
